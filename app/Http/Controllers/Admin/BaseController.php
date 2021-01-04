@@ -11,10 +11,6 @@ class BaseController extends Controller
         return "Painel administrativo";
     }
 
-    public function produtos() {
-        return "Painel de gestão de produtos";
-    }
-
     public function empresa() {
         return "Painel de gestão empresárial";
     }
