@@ -11,13 +11,13 @@ class ProductController extends Controller
     public function __construct(Request $request){
         $this->request = $request;
 
-        $this->middleware(['auth'])->only([
-            'create',
-            'store',
-            'edit',
-            'update',
-            'destroy'
-        ]);
+        // $this->middleware(['auth'])->only([
+        //     'create',
+        //     'store',
+        //     'edit',
+        //     'update',
+        //     'destroy'
+        // ]);
 
         // Retira a utilização dos middlewares informados nas rotas passadas dentro de except
         // $this->middleware(['auth'])->except([
@@ -30,9 +30,16 @@ class ProductController extends Controller
     }
 
     public function index(){
-        $lista = ['arroz', 'feijao', 'farinha', 'batata', 'bife'];
+        $produtos = ['arroz', 'feijao', 'farinha', 'batata', 'bife'];
+        $valores = ['5,00', '6,00', '3,00', '4,50', '10,00'];
 
-        return $lista;
+        return view('admin.pages.produtos.index', [
+            'produtos' => $produtos,
+            'valores' => $valores
+        ]);
+
+        //Pode ser utilizar também o método compact, como no exemplo a baixo.
+        // return view('/Produtos/produtos', compact('lista', 'valores'));
     }
 
     public function show($idProduto){
@@ -40,19 +47,19 @@ class ProductController extends Controller
     }
 
     public function create(){
-        return "Formulário de criação de um produto";
+        return view('admin.pages.produtos.create');
     }
 
-    public function store(){
-        return "O produto foi criado";
+    public function store(Request $request){
+        dd('Cadastrando...');
     }
 
     public function edit($idProduto){
-        return "Formulário para editar o produto: {$idProduto}";
+        return view('admin.pages.produtos.edit', compact('idProduto'));
     }
 
-    public function update($idProduto){
-        return "O produto a ser editado é: {$idProduto}";
+    public function update(Request $request, $idProduto){
+        dd("Modificando o produto: {$idProduto}");
     }
 
     public function destroy($idProduto){

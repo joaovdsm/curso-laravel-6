@@ -8,7 +8,7 @@ Route::get('/login', function() {
 })->name('login');
 
 Route::group([
-    'middleware' => [],
+    // 'middleware' => [],
     'prefix' => 'admin',
     'namespace' => 'Admin'
 ], function () {
