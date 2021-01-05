@@ -23,6 +23,8 @@ Route::group([
 
 });
 
+Route::any('produtos/search', 'ProductController@search')->name('produtos.search');
+
 Route::resource('produtos', 'ProductController');
 
 /* Executando as mesmas rotas presentes dentro do comando logo a cima, executar neste padrão caso precise de uma maior customização.

@@ -4,25 +4,27 @@
 
 @section('content')
 
-    <h1> Editar o produto: {{ $idProduto }} </h1>
+    <h1> Editando o produto: {{ $produto->nome }}  </h1>
 
-    <form action="{{ route('produtos.update', $idProduto) }}" method="post">
+    <form action="{{ route('produtos.update', $produto->id) }}" method="post" enctype="multipart/form-data">
 
         @method('PUT')
-        {{-- A linha de código a baixo faz o mesmo que o @method logo a cima.
-            <input type="hidden" name="_method" value="PUT">
-        --}}
+        @include('admin.pages.produtos._partials.form')
 
-        @csrf
-        {{-- A linha de código a baixo, representa o mesmo que o @csrf logo a cima.
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        --}}
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
 
-        <input type="text" name="inp_nome" id="inp_nome" placeholder="Nome do produto...">
+        <button type="submit" class="btn btn-success">Salvar</button>
 
-        <input type="number" name="inp_valor" id="inp_valor" placeholder="Valor do produto...">
+        <a href="{{ route('produtos.index') }}" class="btn btn-secondary"> Voltar </a>
 
-        <button type="submit">Enviar</button>
     </form>
+
+        <form action="{{ route('produtos.destroy', $produto->id) }}"  method="post">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger">Deletar</button>
+        </form>
+
+    <div>
 
 @endsection
