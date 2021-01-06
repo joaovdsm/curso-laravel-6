@@ -23,9 +23,9 @@ Route::group([
 
 });
 
-Route::any('produtos/search', 'ProductController@search')->name('produtos.search');
+Route::any('produtos/search', 'ProductController@search')->name('produtos.search')->middleware(['auth', 'check.is.admin']);
 
-Route::resource('produtos', 'ProductController');
+Route::resource('produtos', 'ProductController')->middleware(['auth', 'check.is.admin']);
 
 /* Executando as mesmas rotas presentes dentro do comando logo a cima, executar neste padrão caso precise de uma maior customização.
 
@@ -111,3 +111,7 @@ Route::get('/', function () {
     });
 
 */
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
